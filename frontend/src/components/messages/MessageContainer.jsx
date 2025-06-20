@@ -20,9 +20,14 @@ const MessageContainer = () => {
 			) : (
 				<>
 					{/* Header */}
-					<div className='bg-slate-500 px-4 py-2 mb-2'>
-						<span className='label-text'>To:</span>{" "}
-						<span className='text-gray-900 font-bold'>{selectedConversation.fullName}</span>
+					<div className='bg-gradient-to-r from-slate-600 to-slate-700 px-6 py-3 mb-4 rounded-lg shadow-md'>
+						<div className='flex items-center gap-2'>
+							<span className='text-md text-gray-300 font-medium'>To:</span>
+							<span className='text-gray-100 text-lg font-semibold'>
+								{selectedConversation.fullName}
+							</span>
+							<span className='text-lg ml-1'>{selectedConversation.emoji}</span>
+						</div>
 					</div>
 					<Messages />
 					<MessageInput />

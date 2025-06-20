@@ -30,7 +30,8 @@ export const signup = async (req, res) => {
 			username,
 			password: hashedPassword,
 			gender,
-			profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
+			profilePic: "https://cdn-icons-png.flaticon.com/512/149/149071.png", // Example default avatar
+			
 		});
 
 		if (newUser) {
