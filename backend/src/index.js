@@ -45,11 +45,16 @@ app.use("/api/messages", messageRoutes);
 //   });
 // }
 
-if(process.env.NODE_ENV === "development") {
-server.listen(PORT, () => {
-  console.log("server is running on PORT:" + PORT);
+// Local development only
+if (process.env.NODE_ENV === "development") {
+  server.listen(PORT, () => {
+    console.log("server is running on PORT:" + PORT);
+    connectDB();
+  });
+} else {
+  // In production (like Vercel), just connect DB once
   connectDB();
-});
 }
 
-export default {app, server};
+// ✅ Vercel expects a default export of the app
+export default app;
