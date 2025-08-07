@@ -18,9 +18,10 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
+const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: frontendUrl,
     credentials: true,
   })
 );
@@ -28,15 +29,19 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
-}
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+//   });
+// }
 
+if(process.env.NODE_ENV === "development") {
 server.listen(PORT, () => {
   console.log("server is running on PORT:" + PORT);
   connectDB();
 });
+}
+
+export default server;
