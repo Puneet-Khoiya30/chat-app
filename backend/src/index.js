@@ -26,6 +26,11 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.send("Backend is running ✅");
+});
+
+
 app.get("/api/messages", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
