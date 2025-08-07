@@ -50,16 +50,24 @@ app.use("/api/messages", messageRoutes);
 //   });
 // }
 
-// Local development only
-if (process.env.NODE_ENV === "development") {
-  server.listen(PORT, () => {
-    console.log("server is running on PORT:" + PORT);
-    connectDB();
-  });
-} else {
-  // In production (like Vercel), just connect DB once
-  connectDB();
-}
+// ============ DB CONNECTION + SERVER START ============
+
+const startServer = async () => {
+  try {
+    await connectDB(); // ⏳ Wait for DB connection
+    if (process.env.NODE_ENV === "development") {
+      server.listen(PORT, () => {
+        console.log("✅ Server running on PORT: " + PORT);
+      });
+    }
+  } catch (err) {
+    console.error("❌ Failed to start server:", err);
+    process.exit(1);
+  }
+};
+
+startServer();
+
 
 // ✅ Vercel expects a default export of the app
 export default app;
