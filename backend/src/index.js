@@ -26,6 +26,14 @@ app.use(
   })
 );
 
+app.get("/api/messages", (req, res) => {
+  res.json({ message: "Hello from server!" });
+});
+
+app.get("/favicon.ico", (req, res) => res.status(204).end());
+
+
+
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
@@ -44,4 +52,4 @@ server.listen(PORT, () => {
 });
 }
 
-export default server;
+export default {app, server};
