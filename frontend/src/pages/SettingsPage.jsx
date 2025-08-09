@@ -1,6 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import { THEMES } from "../constants";
 import { useThemeStore } from "../store/useThemeStore";
-import { Send } from "lucide-react";
+import { Send, ArrowLeft, Palette, Eye } from "lucide-react";
 
 const PREVIEW_MESSAGES = [
   { id: 1, content: "Hey! How's it going?", isSent: false },
@@ -9,9 +10,32 @@ const PREVIEW_MESSAGES = [
 
 const SettingsPage = () => {
   const { theme, setTheme } = useThemeStore();
+  const navigate = useNavigate();
+  const handleBackClick = () => {
+    navigate("/");
+  };
 
   return (
     <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
+       <div className="container mx-auto px-4 pt-10 max-w-6xl">
+        {/* Header with Back Button */}
+        <div className="mb-8">
+          <div className="flex items-center gap-4 mb-6">
+            <button 
+              onClick={handleBackClick}
+              className="btn btn-circle btn-sm bg-base-200/50 hover:bg-base-200 border-base-300/50 hover:border-base-300 transition-all duration-200 hover:scale-110 group backdrop-blur-sm"
+            >
+              <ArrowLeft className="w-4 h-4 text-base-content/70 group-hover:text-primary group-hover:-translate-x-0.5 transition-all duration-300" />
+            </button>
+            <div>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-base-content to-primary bg-clip-text text-transparent">
+                Settings
+              </h1>
+              <p className="text-base-content/60 mt-1">Customize your chat experience</p>
+            </div>
+          </div>
+        </div>
+
       <div className="space-y-6">
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-semibold">Theme</h2>
@@ -42,6 +66,7 @@ const SettingsPage = () => {
             </button>
           ))}
         </div>
+      </div>
 
         {/* Preview Section */}
         <h3 className="text-lg font-semibold mb-3">Preview</h3>

@@ -10,6 +10,8 @@ const frontendUrl = process.env.NODE_ENV === "production" ? "https://chat-with-p
 const io = new Server(server, {
   cors: {
     origin: [frontendUrl],
+    methods: ["GET", "POST"], // Explicitly allow these methods
+    credentials: true, // Enable if credentials are needed
     // credentials: true,
   },
 });

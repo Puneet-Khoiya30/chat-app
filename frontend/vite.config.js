@@ -11,6 +11,11 @@ export default defineConfig({
         target: 'http://localhost:5001', // 🔁 Change to your backend URL
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '') // Optional: remove /api prefix
+      },
+      '/socket.io': {
+        target: 'http://localhost:5001',
+        changeOrigin: true,
+        ws: true // Enable WebSocket support
       }
     }
   }

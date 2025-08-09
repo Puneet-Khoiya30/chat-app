@@ -3,8 +3,7 @@ import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "/";
-
+const BASE_URL = import.meta.env.MODE === "development" ? "/socket.io" : "/socket.io"; // Use relative path
 export const useAuthStore = create((set, get) => ({
   authUser: null,
   isSigningUp: false,
@@ -87,10 +86,12 @@ uth/ch
     if (!authUser || get().socket?.connected) return;
 
     const socket = io(BASE_URL, {
-      // withCredentials: true,
+      withCredentials: true,
       query: {
         userId: authUser._id,
       },
+      path: "/socket.io",
+      transports: ["websocket", "polling"], // Explicitly list transports
     });
     socket.connect();
 
